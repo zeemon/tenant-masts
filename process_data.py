@@ -1,6 +1,5 @@
 import csv
 CSV_FILEPATH = 'data/Python Developer Test Dataset.csv'
-DISPLAY_RECORDS = 5
 
 
 class ProcessData:
@@ -19,13 +18,22 @@ class ProcessData:
 
         return data, headers
 
-    def sort_by_current_rent(self, display_records=DISPLAY_RECORDS, reverse=False):
+    def sort_by_current_rent(self, display_records=None, reverse=False):
         sorted_list = sorted(self.data, key=lambda x: x['Current Rent'], reverse=reverse)
 
         if self.verbose:
             print(self.printable_sorted_rent_result(sorted_list=sorted_list, display_records=display_records))
 
         return sorted_list
+
+    def filter_by_lease_years(self, num_years):
+        filtered_list = [i for i in self.data if i['Lease Years'] == str(num_years)]
+
+        # if self.verbose:
+        #   Output the list to the console, including all data fields
+        #   Output the total rent for all items in this list to the console
+
+        return filtered_list
 
     def printable_sorted_rent_result(self, sorted_list, display_records):
         header_str = ''
@@ -50,3 +58,4 @@ class ProcessData:
 if __name__ == '__main__':
     p = ProcessData(verbose=True)
     p.sort_by_current_rent(display_records=5)
+    p.filter_by_lease_years(num_years=25)

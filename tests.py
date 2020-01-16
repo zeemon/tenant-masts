@@ -18,6 +18,10 @@ class TestSum(unittest.TestCase):
         lease_years = [i['Lease Years'] for i in filtered_data]
         self.assertEqual(set(lease_years), {str(num_years)})
 
+    def test_get_mast_counts(self):
+        mast_counts = self.p.get_mast_counts()
+        self.assertEqual(mast_counts['Everything Everywhere Ltd&Hutchison 3G UK Ltd'], 8)
+
 
 if __name__ == '__main__':
     unittest.main()

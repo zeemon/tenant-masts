@@ -1,4 +1,5 @@
 import csv
+import pprint
 CSV_FILEPATH = 'data/Python Developer Test Dataset.csv'
 
 
@@ -35,6 +36,20 @@ class ProcessData:
 
         return filtered_list
 
+    def get_mast_counts(self):
+        mast_counts = {}
+        for i in self.data:
+            if i['Tenant Name'] in mast_counts:
+                mast_counts[i['Tenant Name']] += 1
+            else:
+                mast_counts[i['Tenant Name']] = 1
+
+        if self.verbose:
+            pp = pprint.PrettyPrinter(indent=4)
+            pp.pprint(mast_counts)
+
+        return mast_counts
+
     def printable_sorted_rent_result(self, sorted_list, display_records):
         header_str = ''
         for h in self.headers:
@@ -59,3 +74,5 @@ if __name__ == '__main__':
     p = ProcessData(verbose=True)
     p.sort_by_current_rent(display_records=5)
     p.filter_by_lease_years(num_years=25)
+    p.get_mast_counts()
+

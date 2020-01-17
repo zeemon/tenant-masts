@@ -22,6 +22,10 @@ class TestSum(unittest.TestCase):
         mast_counts = self.p.get_mast_counts()
         self.assertEqual(mast_counts['Everything Everywhere Ltd&Hutchison 3G UK Ltd'], 8)
 
+    def test_filter_by_lease_start(self):
+        filtered_data = self.p.filter_by_lease_start_date(start_date_from="01/06/1999", start_date_to="31/08/2007")
+        self.assertTrue(len(filtered_data),5)
+
 
 if __name__ == '__main__':
     unittest.main()
